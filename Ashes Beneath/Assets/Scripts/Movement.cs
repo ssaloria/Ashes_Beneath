@@ -38,6 +38,11 @@ public class SimpleFirstPersonController : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
+
         if (!controller) return;
 
         // Ground / gravity

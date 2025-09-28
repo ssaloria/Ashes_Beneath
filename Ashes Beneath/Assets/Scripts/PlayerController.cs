@@ -81,6 +81,11 @@ public class PlayerController : MonoBehaviour
     // Standard update called every frame (tick?)
     void Update()
     {
+        if (PauseMenu.GameIsPaused)
+            {
+                return;
+            }
+
         if (isHidden)
         {
             // Exit locker

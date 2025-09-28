@@ -5,6 +5,7 @@ public class MainMenuController : MonoBehaviour
 {
 public void NewGame()
 {
+    Time.timeScale = 1f;
     SaveManager.DeleteSave();
     PlayerPrefs.SetInt("ShouldLoadSave", 0);
     SceneManager.LoadScene("Environment FINAL");
@@ -13,6 +14,7 @@ public void NewGame()
 
     public void LoadGame()
     {
+        Time.timeScale = 1f;
         PlayerPrefs.SetInt("ShouldLoadSave", 1);
         SceneManager.LoadScene("Environment FINAL");
     }
