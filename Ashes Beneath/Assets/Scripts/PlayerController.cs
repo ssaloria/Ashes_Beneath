@@ -10,21 +10,21 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public Transform cameraPivot;
     public LayerMask interactableMask;
-    public LayerMask losBlockers;         
-    public AntagonistAI[] enemies;           
+    public LayerMask losBlockers;
+    public AntagonistAI[] enemies;
 
     // Player Control (Using Unity Prebuilt Movement Packs)
     [Header("Input (Input System)")]
     public InputActionReference move;
-    public InputActionReference look; 
-    public InputActionReference jump; 
+    public InputActionReference look;
+    public InputActionReference jump;
     public InputActionReference sprint;
-    public InputActionReference interact;   
+    public InputActionReference interact;
 
     //Player Speed/Physics
     [Header("Movement")]
     public float walkSpeed = 4.5f;
-    public float sprintSpeed = 7.0f;         
+    public float sprintSpeed = 7.0f;
     public float gravity = -9.81f;
     public float jumpHeight = 1.1f;
     public float mouseSensitivity = 0.15f;
@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     // Footsteps/Audio System !DEPRECIATED!
     [Header("Footsteps")]
     public AudioSource footstepSource;
-    public AudioClip[] footstepClips;       
-    public float stepIntervalWalk = 0.48f; 
+    public AudioClip[] footstepClips;
+    public float stepIntervalWalk = 0.48f;
     public float stepIntervalSprint = 0.36f;
     [Range(0f, 1f)] public float footstepLoudnessWalk = 0.45f;
     [Range(0f, 1f)] public float footstepLoudnessSprint = 0.9f;
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
         // Interact (lockers/doors) !DEPRECIATED!
         if (interact != null && interact.action.WasPressedThisFrame())
-            TryInteract();
+            TryInteract(); 
     }
 
     // Audio Manager for Footsteps !DEPRECIATED!
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
             currentLocker = null;
         }
     }
-    
+
     // Determine whether Antgonist has LoS on Player
     bool HasEnemyLineOfSight(Transform enemy)
     {
