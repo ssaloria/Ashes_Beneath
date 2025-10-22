@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
 public class SimpleFirstPersonController : MonoBehaviour
@@ -38,11 +36,6 @@ public class SimpleFirstPersonController : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.GameIsPaused)
-        {
-            return;
-        }
-
         if (!controller) return;
 
         // Ground / gravity
@@ -75,27 +68,5 @@ public class SimpleFirstPersonController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
-        //Save using key "L"
-        if (Keyboard.current.lKey.wasPressedThisFrame)
-        {
-            Debug.Log("L was pressed using Keyboard API");
-            SaveManager.SavePlayer(transform.position);
-        }
     }
-    
-    void Start()
-{
-    if (PlayerPrefs.GetInt("ShouldLoadSave", 0) == 1)
-    {
-        var pos = SaveManager.LoadPlayer();
-        if (pos.HasValue)
-        {
-            controller.enabled = false;
-            transform.position = pos.Value;
-            controller.enabled = true;
-        }
-        PlayerPrefs.SetInt("ShouldLoadSave", 0); //Reset after loading
-    }
-}
 }
