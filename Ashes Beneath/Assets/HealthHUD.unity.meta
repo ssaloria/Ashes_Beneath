@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Ashes Beneath/Assets/HealthHUD.unity.meta
 guid: 78f42a9bbf82d5f4ca4d34a3a65c5a9d
+========
+guid: edc49acb5649f714f88dc5e4e991c554
+folderAsset: yes
+>>>>>>>> 3a3837f6fa3b3a967f010d6bee1a6eff6ca9cebb:Ashes Beneath/Assets/Menu Stuff.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
