@@ -6,33 +6,45 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
 
     [Header("References")]
-    public HealthUI healthUI;          // drag the Hearts object here
-    public PlayerDeathUI deathUI;      // drag the PlayerDeathUI component here
+    public HealthUI healthUI;      // Hearts parent with HealthUI
+    public PlayerDeathUI deathUI;  // YouDiedCanvas with PlayerDeathUI
+
+    bool isDead;
 
     void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = Mathf.Clamp(currentHealth <= 0 ? maxHealth : currentHealth, 0, maxHealth);
 
-        // Fallbacks if you forgot to assign
-        if (healthUI == null) healthUI = FindFirstObjectByType<HealthUI>(FindObjectsInactive.Include);
-        if (deathUI == null) deathUI = FindFirstObjectByType<PlayerDeathUI>(FindObjectsInactive.Include);
+        if (healthUI == null)
+            healthUI = FindFirstObjectByType<HealthUI>(FindObjectsInactive.Include);
+        if (deathUI == null)
+            deathUI = FindFirstObjectByType<PlayerDeathUI>(FindObjectsInactive.Include);
 
-        if (healthUI != null) healthUI.SetHealth(currentHealth, maxHealth);
+        if (Input.GetKeyDown(KeyCode.L)) TakeDamage(999); // insta-death
+
+
+        healthUI?.SetHealth(currentHealth, maxHealth);
     }
 
     public void TakeDamage(int amount)
     {
-        currentHealth = Mathf.Max(0, currentHealth - amount);
-        if (healthUI != null) healthUI.SetHealth(currentHealth, maxHealth);
+        if (isDead) return;
+
+        currentHealth = Mathf.Clamp(currentHealth - Mathf.Abs(amount), 0, maxHealth);
+        healthUI?.SetHealth(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
+        {
+            isDead = true;
             deathUI?.ShowDeathScreen();
+        }
     }
 
+    // ---- test keys (remove later) ----
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-            TakeDamage(1);
+        if (Input.GetKeyDown(KeyCode.J)) TakeDamage(1);   // lose 1 HP
+        if (Input.GetKeyDown(KeyCode.L)) TakeDamage(999); // insta-death
     }
 }
 

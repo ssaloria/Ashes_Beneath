@@ -4,39 +4,18 @@ using System.Collections;
 
 public class PlayerDeathUI : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private GameObject youDiedCanvas;   // assign YouDiedCanvas
-    [SerializeField] private Animator deathAnimator;     // Animator on YouDiedCanvas
-    [SerializeField] private float pauseDelay = 1.0f;
+    public GameObject youDiedCanvas;   // drag this YouDiedCanvas
 
     public void ShowDeathScreen()
     {
-        if (youDiedCanvas != null && !youDiedCanvas.activeSelf)
-            youDiedCanvas.SetActive(true);
-
-        if (deathAnimator != null)
-            deathAnimator.SetTrigger("Show");
-
-        StartCoroutine(PauseAfter(pauseDelay));
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (youDiedCanvas && !youDiedCanvas.activeSelf) youDiedCanvas.SetActive(true);
+        StartCoroutine(PauseAfter(0.5f));
+        Cursor.visible = true; Cursor.lockState = CursorLockMode.None;
     }
 
-    private IEnumerator PauseAfter(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = 0f;
-    }
+    IEnumerator PauseAfter(float t) { yield return new WaitForSecondsRealtime(t); Time.timeScale = 0f; }
 
-    // Optional buttons
-    public void Retry()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    public void MainMenu(string menuSceneName)
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(menuSceneName);
-    }
+    public void Retry() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
 }
+
+

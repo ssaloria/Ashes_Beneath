@@ -3,8 +3,7 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    [Header("Assign Heart Images in order (Left → Right)")]
-    public Image[] hearts;          // size = 5
+    public Image[] hearts;          // 5 images
     [Range(0f, 1f)] public float emptyAlpha = 0.25f;
 
     public void SetHealth(int current, int max)
@@ -12,7 +11,7 @@ public class HealthUI : MonoBehaviour
         for (int i = 0; i < hearts.Length; i++)
         {
             bool withinMax = i < max;
-            hearts[i].gameObject.SetActive(withinMax);
+            if (hearts[i]) hearts[i].gameObject.SetActive(withinMax);
             if (!withinMax) continue;
 
             bool filled = i < current;
